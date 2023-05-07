@@ -53,6 +53,12 @@ const userController = {
     // error handling jadi lebih enak
     // backend lebih aman dikarenakan kita ngga ngasih tau errornya ke frontend
   },
+  addUser() {
+    db.addUser({
+      groupid: "",
+      id: "",
+    });
+  },
   register() {
     // handle register
     return errors.ErrForbidden();
@@ -148,13 +154,13 @@ const dbMethod = {
    */
   getAllUser(filter) {
     const result = db.user.filter((d) => {
-      if (filter.nationality && filter.nationality != d.nationality) {
+      if (isTheSame(filter.nationality, d.nationality)) {
         return null;
       }
-      if (filter.groupid && filter.groupid != d.groupid) {
+      if (isTheSame(filter.groupid, d.groupid)) {
         return null;
       }
-      if (filter.ranking && filter.ranking != d.ranking) {
+      if (isTheSame(filter.ranking, d.ranking)) {
         return null;
       }
 
@@ -163,6 +169,13 @@ const dbMethod = {
     return result;
   },
 };
+
+function isTheSame(actual, check) {
+  if (actual && actual != check) {
+    return false;
+  }
+  return actual;
+}
 
 const db = {
   user: [
@@ -191,4 +204,17 @@ const db = {
       ranking: "",
     },
   ],
+  /**
+   *
+   * @param {Object} user
+   * @param {string} user.id
+   * @param {string} user.name
+   * @param {string} user.username
+   * @param {string} user.nationality
+   * @param {string} user.groupid
+   * @param {string} user.ranking
+   */
+  addUser(user) {
+    this.user.push(user);
+  },
 };
