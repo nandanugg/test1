@@ -13,6 +13,10 @@
    - usahakan gunakan satu tipe data untuk parameter / variable
    - hindari parameter / variable yang memiliki banyak tipe data
      karena if else nya bakal panjang dan sulit
-3. buat method2 bantuan agar hidup lebih mudah
+3. buat method2 bantuan (utils) agar hidup lebih mudah
    - misal buat [responseHandler](responseHandler.js)
    - atau [errors](errors.js)
+   - utils ini ada level
+     - umum yang digunakan di router, controller atau model (minimal 2)
+     - specific, hanya di router, controller, atau model
+     - folder utilnya ditaruh sesuai dengan level, misal kalo umum ya di root (di samping index.js), kalo spesifk ya di folder routernya misal
